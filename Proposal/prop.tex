@@ -1,0 +1,33 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\author{Thomas Reese and Ben Seefeldt}
+\date{November 18, 2013}
+\title{Populess: Moving Object Removal from Multiple Static Scene Images}
+
+\begin{document}
+\maketitle
+\doublespacing
+
+For our project we hope to explore options for the removal of moving objects
+from several images of a single scene from a static location. We hope to draw on
+numerous techniques learned in the course to develop a method which will be more
+robust than a simple median filtering method.
+
+We will develop our method using video input, and hopefully adapt it for use
+with images taken in quick succession from a hand-held camera.
+
+We will create an initial composite of the image using na\"ive methods. We will
+use these method to create a map of uncertain areas of the image. Treating these
+areas as potential holes we will determine the correct pixel from the set of
+potential pixels based on object removal techniques. By limiting ourselves to a
+set of known, potential pixels we hope to accurately fill ares which contain
+complex, or irregular patterns.
+
+We believe using video data will give us the most straightforward way to do
+this, as the camera information will remain static. However, provided things in
+the first stage of project work proceed easily, it should be straightforward to
+modify the image alignment code from the most recent project to allow us to use
+fewer images taken from slightly different locations. 
+
+\end{document}
