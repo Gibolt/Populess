@@ -1,9 +1,9 @@
 function [blob_im] = find_blobs(im)
     [h,w] = size(im);
     blob_im = zeros(h,w);
-    msk = ones(11,11);
+    msk = ones(floor(h/15),floor(w/15));
     immsk = imfilter(im,msk);
-    immsk(immsk<60)=0;
+    immsk(immsk<h*w/500)=0;
     immsk(immsk~=0)=1;
 %    for x = 2:h-1
 %        for y = 2:w-1
