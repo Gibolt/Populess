@@ -11,10 +11,10 @@ function [medIm] = median_im(varargin)
 
 %        im1 = rgb2ycbcr(medIm);
 %        im2 = rgb2ycbcr(varargin{2});
-        im1 = rgb2hsv(medIm);
-        im2 = rgb2hsv(varargin{2});
-        mask = disparity_mask(im1(:,:,1), im2(:,:,1), .05);
-        imshow(mask);
+%        im1 = rgb2hsv(medIm);
+%        im2 = rgb2hsv(varargin{2});
+%        mask = disparity_mask(im1(:,:,1), im2(:,:,1), .05);
+%        imshow(mask);
     %rgb2ycbcr()
     end
 end
