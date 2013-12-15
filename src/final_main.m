@@ -18,7 +18,6 @@ if DO_X
     % HSV channel 3 is the most informative. So far.
     % Potentially ycbrc channel 2 
     
-    
     i1m  = disparity_mask(mI_hsv(:,:,3),im1_hsv(:,:,3),0.001);
     
     i2m = disparity_mask(mI_hsv(:,:,3),im2_hsv(:,:,3),0.001);
