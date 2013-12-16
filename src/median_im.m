@@ -1,20 +1,30 @@
 function [medIm] = median_im(varargin)
-    [~,vars] = size(varargin);
+    [~, vars] = size(varargin);
+    [w,h,dim] = size(varargin{1});
     if vars > 0
-        X = zeros(size(varargin{1}));
+        ims = zeros(w, h, dim, vars);
         for n = 1:vars
-            X(:,:,:,n) = varargin{n};
+            ims(:,:,:,n) = varargin{n};
         end
-        medIm=median(X,4);
-%        ssd1 = compute_ssd(medIm(:,:,1), varargin{2}(:,:,1));
-%        ssd2 = compute_ssd(medIm(:,:,1), varargin{1}(:,:,1));
+        medIm=median(ims,4);
+		medImHsv = rgb2hsv(medIm);
 
-%        im1 = rgb2ycbcr(medIm);
-%        im2 = rgb2ycbcr(varargin{2});
-%        im1 = rgb2hsv(medIm);
-%        im2 = rgb2hsv(varargin{2});
-%        mask = disparity_mask(im1(:,:,1), im2(:,:,1), .05);
-%        imshow(mask);
-    %rgb2ycbcr()
+        disparity_masks = zeros(w, h, vars);
+        for n = 1:vars
+			imHsv = rgb2hsv(ims(:,:,:,n));
+            disparity_masks(:,:,n) = disparity_mask(medImHsv(:,:,3),imHsv(:,:,3),0.001);
+        end
+        sumMask = sum(disparity_masks, 3);
+		sumMask(sumMask>0) = 1;
+
+		blob = find_blobs(sumMask);
+		blob = flood_fill(blob);
+        numBlobs = max(max(blob));
+        for n = 1:numBlobs
+            oneBlob = blob;
+            oneBlob(oneBlob ~= n) = 0;
+            oneBlob(oneBlob == n) = 1;
+			medIm = repair_median(oneBlob, ims, medIm);
+        end
     end
 end
