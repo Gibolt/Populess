@@ -11,6 +11,7 @@ function [medIm] = median_im(varargin)
 
         disparity_masks = zeros(w, h, vars);
         for n = 1:vars
+            % HSV channel 3 is the most informative.
 			imHsv = rgb2hsv(ims(:,:,:,n));
             disparity_masks(:,:,n) = disparity_mask(medImHsv(:,:,3),imHsv(:,:,3),0.001);
         end
@@ -25,7 +26,7 @@ function [medIm] = median_im(varargin)
             oneBlob = blob;
             oneBlob(oneBlob ~= n) = 0;
             oneBlob(oneBlob == n) = 1;
-			medIm = repair_median(oneBlob, ims, medIm);
+			[medIm, ~] = repair_median(oneBlob, ims, medIm);
         end
     end
 end

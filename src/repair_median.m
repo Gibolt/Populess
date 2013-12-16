@@ -1,4 +1,4 @@
-function [med] = repair_median(mask, ims, med)
+function [med, best] = repair_median(mask, ims, med)
     [w,h,dim,num] = size(ims);
 	[left, right, top, bottom] = bounding_box(mask);
 	bestIm = 1; bestTotal = 100000000;
@@ -10,5 +10,5 @@ function [med] = repair_median(mask, ims, med)
 		end
 	end
 
-	med = poissonBlend(ims(:,:,:,bestIm), mask, med);
+	[med, bestIm] = poissonBlend(ims(:,:,:,bestIm), mask, med);
 end
