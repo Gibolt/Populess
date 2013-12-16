@@ -10,5 +10,5 @@ function [med] = repair_median(mask, ims, med)
 		end
 	end
 
-	med = poissonBlend(ims(:,:,:,bestIm), mask, med)
+	med = poissonBlend(ims(:,:,:,bestIm), mask, med);
 end

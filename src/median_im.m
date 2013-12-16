@@ -6,7 +6,7 @@ function [medIm] = median_im(varargin)
         for n = 1:vars
             ims(:,:,:,n) = varargin{n};
         end
-        medIm=median(ims,4);
+        medIm=mode(ims,4);
 		medImHsv = rgb2hsv(medIm);
 
         disparity_masks = zeros(w, h, vars);
@@ -20,6 +20,7 @@ function [medIm] = median_im(varargin)
 		blob = find_blobs(sumMask);
 		blob = flood_fill(blob);
         numBlobs = max(max(blob));
+        keyboard;
         for n = 1:numBlobs
             oneBlob = blob;
             oneBlob(oneBlob ~= n) = 0;
