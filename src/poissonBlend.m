@@ -32,7 +32,6 @@ function [newImg] = poissonBlend(im, mask, new)
     for dim = 1:imdim
         e=0;
         for y = yTopMost:yDownMost
-            y
             for x = xLeftMost:xRightMost
                 if (mask(y,x) == 1)
                     if (x < imw-1)
